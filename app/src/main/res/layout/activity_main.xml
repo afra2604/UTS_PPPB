@@ -10,7 +10,17 @@
     android:orientation="vertical">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calories Tracker !"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/blue1"
+        android:textSize="28sp"/>
+
+    <TextView
         android:id="@+id/time_now"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="00:00"
@@ -250,6 +260,7 @@
 
     <Button
         android:id="@+id/btn_input_data"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
