@@ -108,7 +108,14 @@ class MainActivity : AppCompatActivity() {
             btnInputData.setOnClickListener{
 
                 val intent = Intent(this@MainActivity, InputDataActivity::class.java)
-                    .apply { putExtra("nama") }
+                    .apply { putExtra("nama", nama)
+                    putExtra("beratBadanSekarang", beratBadanSekarang)
+                    putExtra("spinnerBbNow", spinnerBbNow)
+                    putExtra("beratBadanTarget", beratBadanTarget)
+                    putExtra("tujuanDiet", tujuanDiet)
+                    putExtra("tanggalTarget", tanggalTarget)
+                    putExtra("kaloriHarian", kaloriHarian)
+                    }
                 launcher.launch(intent)
 
             }
