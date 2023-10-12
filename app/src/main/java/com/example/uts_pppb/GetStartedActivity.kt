@@ -83,7 +83,7 @@ class GetStartedActivity : AppCompatActivity() {
             val spinnerBbNow = spinnerBbNow.selectedItem.toString()
             val spinnerBbTarget = spinnerBbTarget.selectedItem.toString()
 
-
+// Menyimpan data yang telah diisi ke dalam sharedPreferences
             val editor = sharedPreferences.edit()
             editor.putString("nama", nama)
             editor.putString("beratBadanSekarang", beratBadanSekarang)

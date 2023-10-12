@@ -10,7 +10,7 @@ import com.example.uts_pppb.databinding.ActivitySplashBinding
 class SplashActivity : AppCompatActivity() {
     //untuk deklarasi berapa lama timer splash screen muncul
     private lateinit var binding: ActivitySplashBinding
-    private val SPLASH_TIME_OUT:Long = 3000
+    private val SPLASH_TIME_OUT:Long = 3000 //3 Detik
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

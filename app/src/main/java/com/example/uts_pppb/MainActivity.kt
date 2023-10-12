@@ -50,6 +50,8 @@ class MainActivity : AppCompatActivity() {
                 binding.cardTanggalTercapai.text = "Tanggal tercapai : $tanggalTarget"
                 binding.cardKalori.text = "Kalori harian : $kaloriHarian"
 
+                //untuk mengambil data yang sudah masuk
+
             }
 
         }
@@ -82,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         val formattedDate = dateFormat.format(currentTime)
 
         // Menampilkan  yang diformat dalam TextView
-
+//menjadikan string
         val sharedPreferences = getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
         val nama = sharedPreferences.getString("nama","")
         val beratBadanSekarang = sharedPreferences.getString("beratBadanSekarang","")

@@ -39,7 +39,7 @@ class InputDataActivity : AppCompatActivity() {
         fillKaloriJumlah = findViewById(R.id.fill_kalori_jumlah)
         btnSimpan1 = findViewById(R.id.btn_simpan1)
 
-
+//untuk mengatur spinner
         val jenisKaloriSpinner = findViewById<Spinner>(R.id.spin_jenis)
         val jenisKaloriList =
             listOf("Karbohidrat", "Lemak", "Mineral", "Protein", "Vitamin", "Zat besi")
