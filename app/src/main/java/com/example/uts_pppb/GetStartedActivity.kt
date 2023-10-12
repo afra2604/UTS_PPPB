@@ -1,6 +1,8 @@
 package com.example.uts_pppb
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -22,6 +24,7 @@ class GetStartedActivity : AppCompatActivity() {
     private lateinit var tanggalTargetDatePicker: DatePicker
     private lateinit var spinnerBbNow: Spinner
     private lateinit var spinnerBbTarget: Spinner
+    private lateinit var sharedPreferences: SharedPreferences
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,6 +32,7 @@ class GetStartedActivity : AppCompatActivity() {
         binding = ActivityGetStartedBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        sharedPreferences = getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
         spinnerBbNow = findViewById(R.id.spinner_bb_now)
         spinnerBbTarget = findViewById(R.id.spinner_bb_target)
         namaEditText = findViewById(R.id.fill_nama)
@@ -58,8 +62,13 @@ class GetStartedActivity : AppCompatActivity() {
         spinnerBbNow.adapter = adapterBbNow
         spinnerBbTarget.adapter =adapterBbTarget
 
-        masuk1.setOnClickListener(View.OnClickListener {
+        if(sharedPreferences.contains("nama")){
             val intent = Intent(this,  MainActivity::class.java)
+            startActivity(intent);
+            finish();
+        }
+
+        masuk1.setOnClickListener(View.OnClickListener {
 
             // Mengambil data dari UI
             val nama = namaEditText.text.toString()
@@ -74,18 +83,19 @@ class GetStartedActivity : AppCompatActivity() {
             val spinnerBbNow = spinnerBbNow.selectedItem.toString()
             val spinnerBbTarget = spinnerBbTarget.selectedItem.toString()
 
-            // Memasukkan data ke dalam Intent
-            intent.putExtra("nama", nama)
-            intent.putExtra("beratBadanSekarang", beratBadanSekarang)
-            intent.putExtra("beratBadanTarget", beratBadanTarget)
-            intent.putExtra("tujuanDiet", tujuanDiet)
-            intent.putExtra("kaloriHarian", kaloriHarian)
-            intent.putExtra("tanggalTarget", tanggalTarget)
-            intent.putExtra("spinnerBbNow", spinnerBbNow)
-            intent.putExtra("spinnerBbTarget", spinnerBbTarget)
 
+            val editor = sharedPreferences.edit()
+            editor.putString("nama", nama)
+            editor.putString("beratBadanSekarang", beratBadanSekarang)
+            editor.putString("beratBadanTarget", beratBadanTarget)
+            editor.putString("tujuanDiet", tujuanDiet)
+            editor.putString("kaloriHarian", kaloriHarian)
+            editor.putString("tanggalTarget", tanggalTarget)
+            editor.putString("spinnerBbNow", spinnerBbNow)
+            editor.putString("spinnerBbTarget", spinnerBbTarget)
+            editor.apply()
 
-
+            val intent = Intent(this,  MainActivity::class.java)
             startActivity(intent)
         })
     }

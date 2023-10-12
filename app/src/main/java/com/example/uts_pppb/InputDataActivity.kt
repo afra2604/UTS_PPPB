@@ -1,5 +1,6 @@
 package com.example.uts_pppb
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -71,18 +72,24 @@ class InputDataActivity : AppCompatActivity() {
             val jumlahKaloriWorkout = fillKaloriJumlah.text.toString()
             val waktuWorkout = waktuWOSpinner.selectedItem.toString()
 
-            // Menambahkan data ke Intent
-            intent.putExtra("nama_makanan", namaMakanan)
-            intent.putExtra("jumlah_kalori", jumlahKalori)
-            intent.putExtra("jenis_kalori", jenisKalori)
-            intent.putExtra("waktu_makan", waktuMakan)
-            intent.putExtra("nama_workout", namaWorkout)
-            intent.putExtra("durasi_workout", durasiWorkout)
-            intent.putExtra("jumlah_kalori_workout", jumlahKaloriWorkout)
-            intent.putExtra("waktu_workout", waktuWorkout)
+
+            val sharedPreferences = getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            var sisaKalori = sharedPreferences.getString("kaloriHarian","0")?.toInt()
+            sisaKalori = (sisaKalori?.plus(jumlahKalori.toInt() - jumlahKaloriWorkout.toInt()) ?:0)
+            editor.putString("nama_makanan", namaMakanan)
+            editor.putString("kaloriMasuk", jumlahKalori)
+            editor.putString("jenis_kalori", jenisKalori)
+            editor.putString("waktu_makan", waktuMakan)
+            editor.putString("nama_workout", namaWorkout)
+            editor.putString("durasi_workout", durasiWorkout)
+            editor.putString("kaloriKeluar", jumlahKaloriWorkout)
+            editor.putString("waktu_workout", waktuWorkout)
+            editor.putString("kaloriHarian", sisaKalori.toString())
+            editor.apply()
 
 
-            setResult(RESULT_OK, intent)
+            startActivity(intent)
             finish()
         }
 

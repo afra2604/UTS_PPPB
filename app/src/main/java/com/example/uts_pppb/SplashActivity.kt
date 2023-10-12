@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import com.example.uts_pppb.databinding.ActivitySplashBinding
-import com.example.uts_pppb.databinding.ActivityWelcomingBinding
 
 
 class SplashActivity : AppCompatActivity() {

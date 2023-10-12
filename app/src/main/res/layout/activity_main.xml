@@ -226,15 +226,14 @@
         >
 
         <TextView
-            android:id="@+id/txt_sisa_kalori"
+            android:id="@+id/txt_kalori_in_terakhir"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:text="Sisa Kalori"
-            android:textSize="18sp"
-            android:padding="8dp"
             android:layout_weight="1"
+            android:padding="8dp"
+            android:text="Kalori Masuk Terakhir"
             android:textColor="@color/blue1"
-            />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -246,15 +245,14 @@
         >
 
         <TextView
-            android:id="@+id/txt_konsumsi_kalori"
+            android:id="@+id/txt_kalori_keluar_terakhir"
             android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:text="Konsumsi Kalori"
-            android:textSize="18sp"
-            android:padding="8dp"
             android:layout_weight="1"
+            android:padding="8dp"
+            android:text="Kalori Keluar Terakhir"
             android:textColor="@color/blue1"
-            />
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -266,6 +264,15 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:text="Masukkan data kalori"
+        />
+    <Button
+        android:id="@+id/btn_home"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:text="Ulangi Program Diet"
         />
 
 

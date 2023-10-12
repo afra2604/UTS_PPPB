@@ -1,10 +1,10 @@
 package com.example.uts_pppb
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
@@ -24,8 +24,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var cardTujuan: TextView
     private lateinit var cardTanggalTercapai: TextView
     private lateinit var cardKalori: TextView
-    private lateinit var sisaKalori: TextView
-    private lateinit var txtKonsumsiKalori: TextView
+    private lateinit var txtKaloriMasuk: TextView
+    private lateinit var txtKaloriKeluar: TextView
+    private lateinit var txtSisaKalori: TextView
 
     private val launcher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -68,8 +69,8 @@ class MainActivity : AppCompatActivity() {
         cardTujuan = findViewById(R.id.card_tujuan)
         cardTanggalTercapai = findViewById(R.id.card_tanggal_tercapai)
         cardKalori = findViewById(R.id.card_kalori)
-        sisaKalori = findViewById(R.id.txt_sisa_kalori)
-        txtKonsumsiKalori = findViewById(R.id.txt_konsumsi_kalori)
+        txtKaloriMasuk = findViewById(R.id.txt_kalori_in_terakhir)
+        txtKaloriKeluar = findViewById(R.id.txt_kalori_keluar_terakhir)
 
         val currentTime = Date()
 
@@ -79,20 +80,24 @@ class MainActivity : AppCompatActivity() {
 
         val formattedTime = timeFormat.format(currentTime)
         val formattedDate = dateFormat.format(currentTime)
-        val nama = intent.getStringExtra("nama")
-        val beratBadanSekarang = intent.getStringExtra("beratBadanSekarang")
-        val beratBadanTarget = intent.getStringExtra("beratBadanTarget")
-        val tujuanDiet = intent.getStringExtra("tujuanDiet")
-        val kaloriHarian = intent.getStringExtra("kaloriHarian")
-        val tanggalTarget = intent.getStringExtra("tanggalTarget")
-        val spinnerBbNow = intent.getStringExtra("spinnerBbNow")
-        val spinnerBbTarget = intent.getStringExtra("spinnerBbTarget")
-        val kaloriMasuk = intent.getStringExtra("fillJumlah")
-        val kaloriKeluar = intent.getBooleanArrayExtra("fillKaloriJumlah")
-//        val sisaKalori = kaloriHarian-kaloriMasuk
-        val btnInputData = findViewById<Button>(R.id.btn_input_data)
-""
+
         // Menampilkan  yang diformat dalam TextView
+
+        val sharedPreferences = getSharedPreferences("MySharedPreferences", Context.MODE_PRIVATE)
+        val nama = sharedPreferences.getString("nama","")
+        val beratBadanSekarang = sharedPreferences.getString("beratBadanSekarang","")
+        val beratBadanTarget = sharedPreferences.getString("beratBadanTarget","")
+        val tujuanDiet = sharedPreferences.getString("tujuanDiet","")
+        val kaloriHarian = sharedPreferences.getString("kaloriHarian","")
+        val tanggalTarget = sharedPreferences.getString("tanggalTarget","")
+        val spinnerBbNow = sharedPreferences.getString("spinnerBbNow","")
+        val spinnerBbTarget = sharedPreferences.getString("spinnerBbTarget","")
+
+        val kaloriMasuk = sharedPreferences.getString("kaloriMasuk","0")
+        val kaloriKeluar = sharedPreferences.getString("kaloriKeluar","0")
+
+        val btnInputData = findViewById<Button>(R.id.btn_input_data)
+        val btnHome = findViewById<Button>(R.id.btn_home)
 
         with(binding) {
 
@@ -104,19 +109,22 @@ class MainActivity : AppCompatActivity() {
             binding.cardTujuan.text = "Tujuan diet : $tujuanDiet"
             binding.cardTanggalTercapai.text = "Tanggal tercapai : $tanggalTarget"
             binding.cardKalori.text = "Kalori harian : $kaloriHarian"
+            binding.txtKaloriInTerakhir.text = "Kalori Terakhir Masuk : " + kaloriMasuk
+            binding.txtKaloriKeluarTerakhir.text = "Kalori Terakhir Keluar : " + kaloriKeluar
 
             btnInputData.setOnClickListener{
 
                 val intent = Intent(this@MainActivity, InputDataActivity::class.java)
-                    .apply { putExtra("nama", nama)
-                    putExtra("beratBadanSekarang", beratBadanSekarang)
-                    putExtra("spinnerBbNow", spinnerBbNow)
-                    putExtra("beratBadanTarget", beratBadanTarget)
-                    putExtra("tujuanDiet", tujuanDiet)
-                    putExtra("tanggalTarget", tanggalTarget)
-                    putExtra("kaloriHarian", kaloriHarian)
-                    }
                 launcher.launch(intent)
+                finish()
+                    }
+            btnHome.setOnClickListener{
+                val editor = sharedPreferences.edit()
+                editor.clear()
+                editor.apply()
+                val intent = Intent(this@MainActivity, GetStartedActivity::class.java)
+                launcher.launch(intent)
+                finish()
 
             }
 
