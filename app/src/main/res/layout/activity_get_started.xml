@@ -157,7 +157,7 @@
         android:id="@+id/title_tanggal_target"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Tangga target tercapai :"
+        android:text="Tanggal target tercapai :"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="@color/blue1"
